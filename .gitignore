@@ -1,0 +1,25 @@
+# Virtual Environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Environment variables
+.env
+
+# Uploaded images
+static/uploads/*
+!static/uploads/.gitkeep
+# Dataset
+dataset/
+
+# TensorBoard logs
+logs/

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skin Disease Detection AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="header">
+
+                <div class="logo">
+                    🩺
+                </div>
+
+                <div>
+
+                    <h1>Skin Disease Detection AI</h1>
+
+                    <p class="subtitle">
+                        Early Detection of Skin Diseases using Deep Learning (EfficientNetB0)
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form
+                action="{{ url_for('prediction') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                id="uploadForm">
+
+                <div class="footer">
+
+                    <p>
+                        Powered by <strong>TensorFlow</strong> |
+                        EfficientNetB0 |
+                        HAM10000 Dataset
+                    </p>
+
+                </div>
+
+                <div class="upload-box">
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required>
+
+                    <label for="image" id="uploadLabel">
+
+                        <img
+                            id="preview"
+                            src=""
+                            alt="Image Preview"
+                            style="display:none;">
+
+                        <div id="uploadContent">
+
+                            <span class="upload-icon">📷</span>
+
+                            <h3>Choose a Skin Lesion Image</h3>
+
+                            <p>JPG, JPEG or PNG</p>
+
+                            <small>
+                                Click anywhere in this box to browse files
+                            </small>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="predictBtn">
+                    🔍 Predict Disease
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Loading Overlay -->
+
+    <div id="loading">
+
+        <div class="loader"></div>
+
+        <h2>Analyzing Image...</h2>
+
+        <p>Please wait while the AI predicts the disease.</p>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/preview.js') }}"></script>
+
+</body>
+
+</html>

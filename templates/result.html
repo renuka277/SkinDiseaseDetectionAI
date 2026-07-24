@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<div class="progress">
+
+    <div
+        class="progress-bar"
+        id="progressBar"
+        data-width="{{ result.confidence }}">
+
+    </div>
+
+</div>
+
+<body>
+
+<div class="container">
+
+    <div class="card result-card">
+
+        <h1>🩺 Prediction Result</h1>
+
+        <div class="result-grid">
+
+            <!-- Uploaded Image -->
+
+            <div class="image-section">
+
+                <h2>Uploaded Image</h2>
+
+                <img
+                    class="result-image"
+                    src="{{ url_for('static', filename='uploads/' + image) }}"
+                    alt="Uploaded Image">
+
+            </div>
+
+            <!-- Prediction Details -->
+
+            <div class="details-section">
+
+                <!-- Disease -->
+
+                <div class="info-box">
+
+                    <h3>Disease</h3>
+
+                    <p class="value">
+                        {{ result.disease }}
+                    </p>
+
+                </div>
+
+                <!-- Disease Code -->
+
+                <div class="info-box">
+
+                    <h3>Disease Code</h3>
+
+                    <p class="value">
+                        {{ result.code }}
+                    </p>
+
+                </div>
+
+                <!-- Confidence -->
+
+                <div class="info-box">
+
+                    <h3>Confidence</h3>
+
+                    <p class="confidence">
+                        {{ result.confidence }}%
+                    </p>
+
+                    <div class="progress">
+
+    <div
+        class="progress-bar"
+        id="progressBar"
+        data-width="{{ result.confidence }}">
+
+    </div>
+
+</div>
+
+                </div>
+
+                <!-- Severity -->
+
+                <div class="info-box">
+
+                    <h3>Severity</h3>
+
+                    {% if result.severity == "High" %}
+
+                        <span class="badge high">🔴 High</span>
+
+                    {% elif result.severity == "Medium" %}
+
+                        <span class="badge medium">🟠 Medium</span>
+
+                    {% else %}
+
+                        <span class="badge low">🟢 Low</span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Description -->
+
+        <div class="description-box">
+
+            <h2>Description</h2>
+
+            <p>
+                {{ result.description }}
+            </p>
+
+        </div>
+
+        <!-- Precautions -->
+
+        <div class="description-box">
+
+            <h2>Recommended Precautions</h2>
+
+            <ul>
+
+                {% for item in result.precautions %}
+
+                    <li>✔ {{ item }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- Disclaimer -->
+
+        <div class="disclaimer">
+
+    <h3>⚠️ Disclaimer</h3>
+
+    <p>
+        This prediction is generated using an AI model trained on the
+        HAM10000 dataset. It is intended for educational and research
+        purposes only and should not be considered a medical diagnosis.
+        Always consult a qualified dermatologist for professional advice.
+    </p>
+
+</div>
+
+<a href="/" class="home-btn">
+    Analyze Another Image
+</a>
+    </div>
+
+</div>
+
+</body>
+
+</html>

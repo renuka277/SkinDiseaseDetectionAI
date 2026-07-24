@@ -1,0 +1,676 @@
+/* =====================================================
+   Skin Disease Detection AI
+   Professional Medical Dashboard
+===================================================== */
+
+/* ---------- Reset ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+
+    background:linear-gradient(135deg,#e8f4ff,#d9ecff,#f8fbff);
+
+    min-height:100vh;
+
+    color:#1f2937;
+
+}
+
+/* ---------- Layout ---------- */
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.card{
+
+    width:100%;
+
+    max-width:720px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+
+    animation:fadeUp .6s ease;
+
+}
+
+/* ---------- Logo ---------- */
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#1976d2;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:42px;
+
+    margin-bottom:20px;
+
+}
+
+/* ---------- Header ---------- */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-bottom:35px;
+
+}
+
+.header h1{
+
+    text-align:center;
+
+    color:#1565c0;
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+}
+
+.subtitle{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+    text-align:left;
+
+}
+
+@media(max-width:768px){
+
+.header{
+
+flex-direction:column;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+}
+
+}
+
+/* ---------- Footer ---------- */
+
+.footer{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:15px;
+
+    margin-bottom:18px;
+
+}
+
+.footer strong{
+
+    color:#1976d2;
+
+}
+
+/* ---------- Upload Box ---------- */
+
+.upload-box{
+
+    margin-bottom:30px;
+
+}
+
+.upload-box input{
+
+    display:none;
+
+}
+
+.upload-box label{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    border:3px dashed #42a5f5;
+
+    border-radius:18px;
+
+    background:#f8fbff;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    overflow:hidden;
+
+    min-height:390px;
+
+    padding:20px;
+
+}
+
+.upload-box label:hover{
+
+    background:#edf6ff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(33,150,243,.18);
+
+}
+
+/* Upload Content */
+
+#uploadContent{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:15px;
+
+    text-align:center;
+
+}
+
+.upload-icon{
+
+    font-size:60px;
+
+}
+
+.upload-box h3{
+
+    color:#1565c0;
+
+}
+
+.upload-box p{
+
+    color:#555;
+
+}
+
+.upload-box small{
+
+    color:#888;
+
+}
+
+/* ---------- Image Preview Inside Upload Box ---------- */
+
+#preview{
+
+    display:none;
+
+    width:100%;
+
+    max-width:100%;
+
+    height:350px;
+
+    object-fit:contain;
+
+    border-radius:14px;
+
+}
+
+/* ---------- Button ---------- */
+
+button{
+
+    width:100%;
+
+    border:none;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#1565c0;
+
+    transform:translateY(-2px);
+
+}
+
+/* ---------- Loading ---------- */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:rgba(255,255,255,.95);
+
+    z-index:9999;
+
+}
+
+.loader{
+
+    width:70px;
+
+    height:70px;
+
+    border:8px solid #d7e9ff;
+
+    border-top:8px solid #1976d2;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin-bottom:20px;
+
+}
+
+#loading h2{
+
+    color:#1565c0;
+
+    margin-bottom:10px;
+
+}
+
+#loading p{
+
+    color:#64748b;
+
+}
+
+/* ---------- Result Page ---------- */
+
+.result-card{
+
+    max-width:1250px;
+
+}
+
+.result-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:35px;
+
+    margin:35px 0;
+
+    align-items:start;
+
+}
+
+.image-section{
+
+    background:#f8fbff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.image-section h2{
+
+    color:#1565c0;
+
+    margin-bottom:20px;
+
+}
+
+.result-image{
+
+    width:100%;
+
+    max-width:430px;
+
+    border-radius:18px;
+
+    border:5px solid #1976d2;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.details-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.info-box{
+
+    background:white;
+
+    border-left:6px solid #1976d2;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.info-box h3{
+
+    color:#1976d2;
+
+    font-size:15px;
+
+    margin-bottom:10px;
+
+    text-transform:uppercase;
+
+}
+
+.value{
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+.confidence{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#2e7d32;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:12px;
+
+    background:#e5e7eb;
+
+    border-radius:30px;
+
+    margin-top:12px;
+
+    overflow:hidden;
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    background:linear-gradient(90deg,#42a5f5,#1976d2);
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    border-radius:40px;
+
+    color:white;
+
+    font-weight:700;
+
+}
+
+.high{
+
+    background:#d32f2f;
+
+}
+
+.medium{
+
+    background:#fb8c00;
+
+}
+
+.low{
+
+    background:#2e7d32;
+
+}
+
+.description-box{
+
+    margin-top:30px;
+
+    background:#f8fbff;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.description-box h2{
+
+    color:#1565c0;
+
+    margin-bottom:18px;
+
+}
+
+.description-box p{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+.description-box ul{
+
+    padding-left:20px;
+
+    margin-top:10px;
+
+}
+
+.description-box li{
+
+    margin-bottom:12px;
+
+}
+
+.home-btn{
+
+    display:block;
+
+    width:250px;
+
+    margin:40px auto 0;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:15px 28px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+.home-btn:hover{
+
+    background:#1565c0;
+
+}
+
+.disclaimer{
+
+    margin-top:35px;
+
+    padding:22px;
+
+    background:#fff8e1;
+
+    border-left:6px solid #ff9800;
+
+    border-radius:12px;
+
+}
+
+.disclaimer h3{
+
+    color:#e65100;
+
+    margin-bottom:10px;
+
+}
+
+.disclaimer p{
+
+    color:#555;
+
+    line-height:1.7;
+
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
