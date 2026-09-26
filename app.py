@@ -1,4 +1,5 @@
 import os
+import base64
 
 from flask import (
     Flask,
@@ -59,13 +60,18 @@ def prediction():
 
     result = predict(filepath)
 
-    filename = os.path.basename(filepath)
+    with open(filepath, "rb") as image_file:
+        image_data = base64.b64encode(image_file.read()).decode("utf-8")
+
+    mime_type = file.mimetype or "image/jpeg"
+
+    image_src = f"data:{mime_type};base64,{image_data}"
 
     return render_template(
-    "result.html",
-    image=filename,
-    result=result
-)
+        "result.html",
+        image=image_src,
+        result=result
+    )
 
 
 # ======================================================
@@ -73,8 +79,6 @@ def prediction():
 # ======================================================
 
 if __name__ == "__main__":
-    import os
-
     port = int(os.environ.get("PORT", 5000))
 
     app.run(
