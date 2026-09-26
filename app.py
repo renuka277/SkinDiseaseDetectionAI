@@ -17,7 +17,7 @@ from src.predict import predict
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = "/tmp/uploads"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
